@@ -9,7 +9,7 @@ This package contains a set of LWC components primarily dedicated to the import 
 records from / to Microsoft Excel spreadsheets directly from teh Lightning UX.
 
 It leverages the opensource **[SheeJs](https://sheetjs.com/)** Javascript library to convert Excel 
-spreadsheet data into/from JSON record arrays and adds a **[SLDS](https://www.lightningdesignsystem.com/) **
+spreadsheet data into/from JSON record arrays and adds a **[SLDS](https://www.lightningdesignsystem.com/)**
 compliant UX layer to easily perform simple import/export operations.
 
 These components were built as contributions/examples for former & ongoing Advisory assignments by 
