@@ -6,9 +6,9 @@
 ## Introduction
 
 This package contains a set of LWC components primarily dedicated to the import and export of Salesforce
-records from / to Microsoft Excel spreadsheets directly from teh Lightning UX.
+records from / to Microsoft Excel spreadsheets directly from the Lightning UX.
 
-It leverages the opensource **[SheeJs](https://sheetjs.com/)** Javascript library to convert Excel 
+It leverages the opensource **[SheetJs](https://sheetjs.com/)** Javascript library to convert Excel 
 spreadsheet data into/from JSON record arrays and adds a **[SLDS](https://www.lightningdesignsystem.com/)**
 compliant UX layer to easily perform simple import/export operations.
 
