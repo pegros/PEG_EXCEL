@@ -40,3 +40,10 @@ Multiple options and controls are available for administrators:
 ### **[sfpegExcelGeneratorCmp](/help/sfpegExcelLoaderCmp.md)** Data Exporter
 
 🚧 _Planned for near future_ 🚧 
+
+## Technical Details
+
+Each component is provided in a dedicated folder containing all the dependencies
+required to deploy and use it.
+
+🚧 _Work in Progress_ 🚧 
