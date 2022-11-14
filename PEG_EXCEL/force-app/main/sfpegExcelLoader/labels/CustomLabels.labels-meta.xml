@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>sfpegExcelLoaderImportLabel</fullName>
+        <categories>PEG Component LWC Button Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderImportLabel</shortDescription>
+        <value>Import</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderImportTitle</fullName>
+        <categories>PEG Component LWC Action Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderImportTitle</shortDescription>
+        <value>Launch data import for displayed file tab</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderBackTitle</fullName>
+        <categories>PEG Component LWC Action Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderBackTitle</shortDescription>
+        <value>Go back to file upload</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderInfoTitle</fullName>
+        <categories>PEG Component LWC Action Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderInfoTitle</shortDescription>
+        <value>More information</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderUploadLabel</fullName>
+        <categories>PEG Component LWC Action Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderUploadLabel</shortDescription>
+        <value>Please upload your Excel spreadsheet</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderSelectLabel</fullName>
+        <categories>PEG Component LWC Action Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderSelectLabel</shortDescription>
+        <value>Please select Unique ID field to use</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderNoDataMessage</fullName>
+        <categories>PEG Component LWC Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderNoDataMessage</shortDescription>
+        <value>No data available on this tab</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderFailuresLabel</fullName>
+        <categories>PEG Component LWC Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderFailuresLabel</shortDescription>
+        <value>failures</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderCreationsLabel</fullName>
+        <categories>PEG Component LWC Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderCreationsLabel</shortDescription>
+        <value>creations</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderUpdatesLabel</fullName>
+        <categories>PEG Component LWC Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderUpdatesLabel</shortDescription>
+        <value>updates</value>
+    </labels>
+
+    <labels>
+        <fullName>sfpegExcelLoaderRowCountMessage</fullName>
+        <categories>PEG Component LWC Information Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderRowCountMessage</shortDescription>
+        <value>{0} records available in this tab.</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderExternalIdMessage</fullName>
+        <categories>PEG Component LWC Information Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderExternalIdMessage</shortDescription>
+        <value>{0} field is used as unique identifier.</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderMaxRowWarning</fullName>
+        <categories>PEG Component LWC Warning Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderMaxRowWarning</shortDescription>
+        <value>Only the first {0} records will be imported!</value>
+    </labels>
+
+    
+    <labels>
+        <fullName>sfpegExcelLoaderHelpTitle</fullName>
+        <categories>PEG Component LWC Popup Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderHelpTitle</shortDescription>
+        <value>Import Context</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderHelpMode</fullName>
+        <categories>PEG Component LWC Popup Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderHelpMode</shortDescription>
+        <value>Mode</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderHelpObject</fullName>
+        <categories>PEG Component LWC Popup Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderHelpObject</shortDescription>
+        <value>Object</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderHelpLookup</fullName>
+        <categories>PEG Component LWC Popup Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderHelpLookup</shortDescription>
+        <value>Lookup</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderHelpFields</fullName>
+        <categories>PEG Component LWC Popup Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderHelpFields</shortDescription>
+        <value>Fields</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderHelpMaxRows</fullName>
+        <categories>PEG Component LWC Popup Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderHelpMaxRows</shortDescription>
+        <value>Max. #Rows</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderHelpExtensions</fullName>
+        <categories>PEG Component LWC Popup Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderHelpExtensions</shortDescription>
+        <value>Extensions</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderHelpAllFieldsMessage</fullName>
+        <categories>PEG Component LWC Popup Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderHelpAllFieldsMessage</shortDescription>
+        <value>Any allowed for the user</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderHelpExcelExtensionMessage</fullName>
+        <categories>PEG Component LWC Popup Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderHelpExcelExtensionMessage</shortDescription>
+        <value>.xlsx only</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderHelpNoLookupMessage</fullName>
+        <categories>PEG Component LWC Popup Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderHelpNoLookupMessage</shortDescription>
+        <value>None</value>
+    </labels>
+</CustomLabels>

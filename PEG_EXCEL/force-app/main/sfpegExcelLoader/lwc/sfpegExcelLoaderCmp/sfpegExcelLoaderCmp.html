@@ -1,0 +1,267 @@
+<template>
+    <div class={cardClass}>
+        <lightning-card title={cardTitle} icon-name={cardIcon}>
+
+            <!-- Header actions -->
+            <lightning-button-group slot="actions">
+                <lightning-button   if:true={isStep2}
+                                    label={importButtonLabel}
+                                    icon-name="utility:upload"
+                                    variant="brand"
+                                    title={importButtonTitle}
+                                    onclick={handleImport} >
+                </lightning-button>
+                <lightning-button-icon  if:true={isStep2or3}
+                                        icon-name="utility:undo"
+                                        alternative-text={backButtonTitle}
+                                        onclick={handleBack} >
+                </lightning-button-icon>
+                <lightning-button-icon-stateful icon-name="utility:info"
+                                                selected={showHelp}
+                                                alternative-text={infoButtonTitle}
+                                                onclick={toggleHelp} >
+                </lightning-button-icon-stateful>
+            </lightning-button-group>
+
+            <!-- Content Display -->
+            <div class="slds-var-p-horizontal_medium">
+
+                <!-- Message Display -->
+                <div if:true={messageTitle} >
+                    <div class="slds-box slds-box_small slds-theme_shade slds-media slds-media_center">
+                        <div class="slds-media__figure">
+                            <lightning-icon if:false={isError}
+                                            icon-name="utility:success"
+                                            alternative-text="Success"
+                                            size="small"
+                                            variant="success"></lightning-icon>
+                            <lightning-icon if:true={isError}
+                                            icon-name="utility:error"
+                                            alternative-text="Error"
+                                            size="small"
+                                            variant="error"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body">
+                            <p class="slds-text-title_bold">{messageTitle}</p>
+                            <p if:true={messageDetails} class="slds-text-body_small">{messageDetails}</p>    
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step #1 - File Upload -->
+                <div if:true={isStep1}>
+                    <lightning-input    data-name="fileInput"
+                                        type="file"
+                                        accept=".xlsx"
+                                        label={uploadButtonLabel}
+                                        variant="label-inline"
+                                        onchange={handleChange} >
+                    </lightning-input>
+                </div>
+
+                <!-- Step #2 - Data Display and upsert trigger -->
+                <template if:true={isStep2}>
+                    <div class="slds-m-top_x-small">
+                        <lightning-tabset if:true={sheetData} class="slds-m-top_small">
+                            <template for:each={sheetData} for:item="iter" >
+                                <lightning-tab  key={iter.name}
+                                                label={iter.name}   value={iter.name} 
+                                                onactive={handleTabActive}>
+                                    <template if:true={iter.key}>
+                                        <div class="slds-media slds-media_center slds-p-horizontal_x-small slds-m-bottom_small">
+                                            <div class="slds-media__figure">
+                                                <lightning-icon icon-name="utility:info"
+                                                                alternative-text="Information"
+                                                                size="small"
+                                                                variant="info"></lightning-icon>
+                                            </div>
+                                            <div class="slds-media__body">
+                                                <p class="boldText">{iter.countMsg}</p>
+                                                <template if:true={iter.extIdField}>
+                                                    <p if:false={iter.hasMultiExtId} class="">{iter.extIdMsg}</p>
+                                                    <lightning-combobox if:true={iter.hasMultiExtId}
+                                                                        data-name={iter.name}
+                                                                        label={selectButtonLabel}
+                                                                        options={iter.externalIds}
+                                                                        value={iter.extIdField}
+                                                                        variant="label-inline">
+                                                    </lightning-combobox>
+                                                </template>
+                                            </div>
+                                        </div>
+
+                                        <div class={iter.class}>
+                                            <lightning-datatable    hide-checkbox-column="true"
+                                                                    key-field={iter.key}
+                                                                    data={iter.values}
+                                                                    columns={iter.columns}>
+                                            </lightning-datatable>
+                                        </div>
+                                        <div if:true={iter.hasWarnings} class="slds-m-top_small">
+                                            <div class="slds-box slds-box_x-small slds-media slds-media_center slds-theme_shade">
+                                                <div class="slds-media__figure">
+                                                    <lightning-icon icon-name="utility:warning"
+                                                                    alternative-text="Warning"
+                                                                    size="small"
+                                                                    variant="warning"></lightning-icon>
+                                                </div>
+                                                <div class="slds-media__body">
+                                                    <template if:true={iter.ignored.length} >
+                                                        <p class="slds-text-title_bold">Ignored columns</p>
+                                                        <ul class="slds-list_horizontal slds-has-dividers_left slds-wrap">
+                                                            <template for:each={iter.ignored} for:item="iter">
+                                                                <li key={iter.key} class="slds-item slds-text-body_small">
+                                                                    {iter.name}
+                                                                    <lightning-helptext class="slds-m-left_xxx-small helpText" icon-name="utility:info_alt" content={iter.reason}></lightning-helptext>
+                                                                </li>
+                                                            </template>
+                                                        </ul>
+                                                    </template>
+                                                    <p if:true={iter.tooManyRows} class="slds-text-title_bold">{maxRowWarning}</p>
+                                                </div>
+                                            </div>
+                                        </div>                                            
+                                    </template>
+                                    <div if:false={iter.key} class="slds-box slds-box_small slds-theme_shade slds-media slds-media_center">
+                                        <div class="slds-media__figure">
+                                            <lightning-icon icon-name="utility:warning"
+                                                                alternative-text="Warning"
+                                                                size="small"
+                                                                variant="warning"></lightning-icon>
+                                        </div>
+                                            <div class="slds-media__body">
+                                                <p class="slds-text-title_bold">{noDataMessage}</p>
+                                            </div>
+                                    </div>
+                                </lightning-tab>
+                            </template>
+                        </lightning-tabset>
+                    </div>
+                </template>
+
+                <!-- Step #3 - Synthesis of the operation -->
+                <template if:true={isStep3}>
+                    <div if:true={importStatus} class="slds-m-top_small slds-region_narrow ">
+                        <dl class="slds-dl_horizontal">
+                            <template if:true={importStatus.failures}>
+                                <dt class="slds-text-title_bold slds-dl_horizontal__label slds-truncate"><span class="slds-text-color_error ">{importStatus.failures.length}</span> {failuresLabel}</dt>
+                                <dd class="slds-dl_horizontal__detail">
+                                    <ul class="slds-list_horizontal slds-has-dividers_left slds-wrap">
+                                        <template for:each={importStatus.failures} for:item="iter">
+                                            <li key={iter.name} class="slds-item slds-text-body_small">
+                                                {iter.name}
+                                                <lightning-helptext class="slds-m-left_xxx-small helpText" icon-variant="warning" icon-name="utility:warning" content={iter.error}></lightning-helptext>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </dd>
+                            </template>
+                            <template if:true={importStatus.creations}>
+                                <dt class="slds-text-title_bold slds-dl_horizontal__label slds-truncate"><span class="slds-text-color_success ">{importStatus.creations.length}</span> {creationsLabel}</dt>
+                                <dd class="slds-dl_horizontal__detail">
+                                    <ul class="slds-list_horizontal slds-has-dividers_left slds-wrap">
+                                        <template for:each={importStatus.creations} for:item="iter">
+                                            <li key={iter.name} class="slds-item slds-text-body_small">
+                                                <lightning-button   value={iter.id} label={iter.name}
+                                                                    variant="base"  class="bareLink"
+                                                                    onclick={handleNavigate}>
+                                                </lightning-button>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </dd>
+                            </template>
+                            <template if:true={importStatus.updates}>
+                                <dt class="slds-text-title_bold slds-dl_horizontal__label slds-truncate"><span class="slds-text-color_success ">{importStatus.updates.length}</span> {updatesLabel}</dt>
+                                <dd class="slds-dl_horizontal__detail">
+                                    <ul class="slds-list_horizontal slds-has-dividers_left slds-wrap">
+                                        <template for:each={importStatus.updates} for:item="iter">
+                                            <li key={iter.name} class="slds-item slds-text-body_small">
+                                                <lightning-button   value={iter.id} label={iter.name}
+                                                                    variant="base"  class="bareLink"
+                                                                    onclick={handleNavigate}>
+                                                </lightning-button>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </dd>
+                            </template>
+                        </dl>
+                    </div>
+                </template>
+
+            </div>
+
+            <!-- Help Popup -->
+            <div if:true={showHelp} class="helpPopup slds-popover slds-popover_large slds-nubbin_top-right slds-popover_feature" role="dialog">
+                <div id="popover-body-id" class="slds-popover__body">
+                    <div class="slds-media">
+                        <div class="slds-media__body slds-region_narrow ">
+                            <header class="slds-popover__header slds-clearfix">
+                                <h2 class="slds-text-heading_small slds-float_left">{helpTitle}</h2>
+                                <lightning-button-icon  class="slds-float_right"
+                                                        icon-name="utility:close"
+                                                        alternative-text="Close"
+                                                        variant="bare-inverse"
+                                                        onclick={toggleHelp} >
+                                </lightning-button-icon>
+                            </header>
+
+                            <dl class="slds-dl_horizontal">
+                                <dt class="slds-dl_horizontal__label slds-truncate">{helpModeLabel}</dt>
+                                <dd class="slds-dl_horizontal__detail">{importMode}</dd>
+                                <dt class="slds-dl_horizontal__label slds-truncate">{helpObjectLabel}</dt>
+                                <dd class="slds-dl_horizontal__detail">{objectName}</dd>
+                                <dt class="slds-dl_horizontal__label slds-truncate">{helpLookupLabel}</dt>
+                                <dd if:true={lookupField} class="slds-dl_horizontal__detail">{lookupField}</dd>
+                                <dd if:false={lookupField} class="slds-dl_horizontal__detail">{helpNoLookupMessage}</dd>
+                                <dt class="slds-dl_horizontal__label slds-truncate">{helpFieldsLabel}</dt>
+                                <dd if:true={allowedFieldList} class="slds-dl_horizontal__detail">
+                                    <ul class="slds-list_horizontal slds-has-dividers_left slds-wrap">
+                                        <template for:each={allowedFieldList} for:item="iter">
+                                            <li key={iter.key} class="slds-item slds-text-body_small">{iter}</li>
+                                        </template>
+                                    </ul>
+                                </dd>
+                                <dd if:false={allowedFieldList} class="slds-dl_horizontal__detail">{helpAllFieldsMessage}</dd>
+                                <dt class="slds-dl_horizontal__label slds-truncate">{helpMaxRowsLabel}</dt>
+                                <dd if:true={maxRows}  class="slds-dl_horizontal__detail">{maxRows}</dd>
+                                <dd if:false={maxRows}  class="slds-dl_horizontal__detail">No limit</dd>
+                                <dt class="slds-dl_horizontal__label slds-truncate">{helpExtensionsLabel}</dt>
+                                <dd class="slds-dl_horizontal__detail">{helpExcelExtensionMessage}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Debug Information Display -->
+            <div if:true={isDebug} class="slds-p-horizontal_x-small footerContent slds-region_narrow " slot="footer">
+                <dl class="slds-dl_horizontal">
+                    <dt class="slds-dl_horizontal__label slds-truncate">Import</dt>
+                    <dd class="slds-dl_horizontal__detail">Object: {objectName} / Lookup: {lookupField}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Configuration</dt>
+                    <dd class="slds-dl_horizontal__detail">Max Rows: {maxRows} / Mode: {importMode}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Allowed Fields</dt>
+                    <dd class="slds-dl_horizontal__detail wrapText">{allowedFields}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">External ID Fields</dt>
+                    <dd class="slds-dl_horizontal__detail wrapText">{extIdFieldList}</dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">SheetJs Library</dt>
+                    <dd class="slds-dl_horizontal__detail">Mini Version {sheetJsVersion} - Know more on &nbsp;
+                        <lightning-formatted-url    value="https://sheetjs.com/"
+                                                    label="sheetjs.com"
+                                                    target="_blank">
+                        </lightning-formatted-url>
+                    </dd>
+                    <dt class="slds-dl_horizontal__label slds-truncate">Documentation:</dt>
+                    <dd class="slds-dl_horizontal__detail">
+                        <lightning-formatted-url    value="https://github.com/pegros/PEG_EXCEL/blob/master/help/sfpegExcelLoaderCmp.md"
+                                                    label="See Help on GitHub"
+                                                    target="_blank">
+                        </lightning-formatted-url>
+                    </dd>
+                </dl>
+            </div>
+        </lightning-card>
+    </div>
+</template>

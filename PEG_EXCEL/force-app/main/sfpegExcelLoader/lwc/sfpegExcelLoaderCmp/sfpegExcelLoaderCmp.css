@@ -1,0 +1,28 @@
+.dataContainerLimit {
+    height: calc(33vh) !important;
+    /*height: 165px !important;*/
+}    
+.footerContent {
+    width:100%;
+    text-align: left !important;
+}
+.helpPopup {
+    position: absolute !important;
+    right: calc(var(--lwc-varSpacingHorizontalMedium) - 8px);
+    top: calc(45px + var(--lwc-varSpacingVerticalMedium));
+    z-index: 100;
+}
+.boldText {
+    font-weight: bold;
+}
+.wrapText {
+    overflow-wrap: break-word;
+}
+.bareLink {
+    --slds-c-button-line-height : 0px !important;
+}
+.helpText {
+    position: relative;
+    top: -3px;
+    right: -5px;
+}
