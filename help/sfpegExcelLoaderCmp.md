@@ -29,6 +29,12 @@ All of the configuration is done in the App Builder via a set of simple properti
 
 🚧 _Work In Progress_ 🚧 
 
+Many custom labels are available for customisation (prefixed as `sfpegExcelLoader`)
+for button titles or labels, misc. labels as well as error or information messages.
+
+A **sfpegExcelLoaderUsage** permission set provides access to the necessary metadata
+to use the component.
+
 ## Technical Details
 
 🚧 _Work In Progress_ 🚧 

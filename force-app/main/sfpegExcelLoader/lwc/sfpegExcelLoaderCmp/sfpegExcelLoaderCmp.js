@@ -83,6 +83,12 @@ import HELP_NO_LOOKUP_MSG   from '@salesforce/label/c.sfpegExcelLoaderHelpNoLook
 import HELP_ALL_FIELDS_MSG  from '@salesforce/label/c.sfpegExcelLoaderHelpAllFieldsMessage';
 import HELP_EXCEL_EXT_MSG   from '@salesforce/label/c.sfpegExcelLoaderHelpExcelExtensionMessage';
 
+import INIT_FAILURE_MSG     from '@salesforce/label/c.sfpegExcelLoaderInitFailure';
+import UPLOAD_SUCCESS_MSG   from '@salesforce/label/c.sfpegExcelLoaderUploadSuccess';
+import UPLOAD_INFO_MSG      from '@salesforce/label/c.sfpegExcelLoaderUploadMessage';
+import IMPORT_FAILURE_MSG   from '@salesforce/label/c.sfpegExcelLoaderImportFailure';
+import IMPORT_PARTIAL_FAILURE_MSG   from '@salesforce/label/c.sfpegExcelLoaderImportPartialFailure';
+import IMPORT_SUCCESS_MSG   from '@salesforce/label/c.sfpegExcelLoaderImportSuccess';
 
 export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElement) {
 
@@ -190,7 +196,7 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
         if (this.isDebug) console.log('wiredObject: START ');
 
         if (error) {
-            this.messageTitle = "Initialisation failure"
+            this.messageTitle = INIT_FAILURE_MSG;
             this.messageDetails = JSON.stringify(error);
             this.isError = true;
             this.processStep = 0;
@@ -298,8 +304,8 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
             if (this.isDebug) console.log('handleChange: sheetData init ', JSON.stringify(this.sheetData));
 
             this.isError = false;
-            this.messageTitle = 'File ' + file.name + ' successfully loaded!'
-            this.messageDetails = 'Please select the tab containing the proper record data before launching the import.';
+            this.messageTitle = UPLOAD_SUCCESS_MSG.replace('{0}', file.name);
+            this.messageDetails = UPLOAD_INFO_MSG;
             this.processStep = 2;
         };
         if (this.isDebug) console.log('handleChange: triggering readAsDataURL ', reader);
@@ -309,7 +315,7 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
         }
         catch (error) {
             this.isError = true;
-            this.messageTitle = 'Initialisation failure'
+            this.messageTitle = INIT_FAILURE_MSG;
             this.messageDetails = this.formatError(error);
         }
 
@@ -420,18 +426,18 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
 
             if (results.hasError) {
                 if (this.isDebug) console.log('handleImport: import failure');
-                this.messageTitle = 'Import (possibly partially) failed!';
+                this.messageTitle = ((results.inserted || results.updated) ? IMPORT_PARTIAL_FAILURE_MSG : IMPORT_FAILURE_MSG);
             }
             else {
                 if (this.isDebug) console.log('handleImport: import full success');
-                this.messageTitle = 'Import successful!';
+                this.messageTitle = IMPORT_SUCCESS_MSG;
             }
 
             this.processStep = 3;
             if (this.isDebug) console.log('handleImport: END OK');
         })
         .catch( error => {
-            this.messageTitle = 'Import failure!';
+            this.messageTitle = IMPORT_FAILURE_MSG;
             this.messageDetails = this.formatError(error);
             this.isError = true;
             this.processStep = 3;

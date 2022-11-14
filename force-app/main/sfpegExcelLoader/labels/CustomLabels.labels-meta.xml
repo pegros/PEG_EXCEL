@@ -187,4 +187,53 @@
         <shortDescription>sfpegExcelLoaderHelpNoLookupMessage</shortDescription>
         <value>None</value>
     </labels>
+
+    <labels>
+        <fullName>sfpegExcelLoaderInitFailure</fullName>
+        <categories>PEG Component LWC Warning Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderInitFailure</shortDescription>
+        <value>Initialisation failure</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderUploadSuccess</fullName>
+        <categories>PEG Component LWC Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderUploadSuccess</shortDescription>
+        <value>File {0} successfully loaded</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderUploadMessage</fullName>
+        <categories>PEG Component LWC Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderUploadMessage</shortDescription>
+        <value>Please select the tab containing the proper record data before launching the import.</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderImportFailure</fullName>
+        <categories>PEG Component LWC Warning Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderImportFailure</shortDescription>
+        <value>Import Failure</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderImportPartialFailure</fullName>
+        <categories>PEG Component LWC Warning Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderImportPartialFailure</shortDescription>
+        <value>Import Partial Failure</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderImportSuccess</fullName>
+        <categories>PEG Component LWC Message</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderImportSuccess</shortDescription>
+        <value>Import Success</value>
+    </labels>
 </CustomLabels>
