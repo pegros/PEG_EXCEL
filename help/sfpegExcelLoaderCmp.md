@@ -21,6 +21,8 @@ Multiple options and controls are available for administrators:
 * possible limitation of the max. number of rows and of the allowed fields
 * possible automatic valuation of a lookup field with the current page record ID
 
+
+---
 ## Component Overview
 
 The component basically provides a 3-step process to import data from an Excel spreadsheet.
@@ -39,6 +41,7 @@ A few additional buttons are available in the card header
 about the import conditions
 ![sfpegExcelLoaderCmp Information Popup](/media/sfpegExcelLoaderInformation.png) 
 
+
 ### Field Mapping
 
 Field mapping is completely implicit (there is no user step to do it):
@@ -53,6 +56,7 @@ Field mapping is completely implicit (there is no user step to do it):
     * In case of polymorphic lookup field (e.g. `OwnerId` on some objects), the related object type should be explicitly 
     mentionned in the column name (e.g. `Owner.User.ExternalId__c`) 
 
+
 ### Import Modes
 
 All imports are actually executed via an `upsert` DML to support the setting of lookups fields leveraging 
@@ -66,6 +70,8 @@ explicitly select the applicable external ID field if multiple ones are availabl
 
 ![sfpegExcelLoaderCmp External ID Selection](/media/sfpegExcelLoaderExtIdSelection.png) 
 
+
+---
 ## Component Configuration
 ### App Builder Configuration
 
@@ -89,6 +95,7 @@ risks), set as a stringified JSON list
     * In atomic mode all records are rejected if one gets an error. 
 * `Show Debug?`to activate debug information (footer display and console logs)
 
+
 ### User Permissions Assigment
 
 A **sfpegExcelLoaderUsage** permission set provides access to the necessary metadata (basically
@@ -100,13 +107,14 @@ proper execution. It should not be assigned to end-users.
 ### Custom Label Customisation
 
 The component relies on a set of custom labels for various labels, titles or error or information messages.
-
 They are all prefixed as `sfpegExcelLoader...` and may easily be customised or translated via standard 
 Salesforce setup.
 
 **Beware** that some of them support token merging to inject data in the custom label content
 (usually via `{0}`token).
 
+
+---
 ## Technical Details
 ### Component Packaging
 
@@ -118,6 +126,7 @@ The **sfpegTestObject__c** custom object is provided only for test purposes and 
 Apex test classes. The same object is included in various **PEG** repositories
 (e.g. **[PEG_LIST](https://github.com/pegros/PEG_LIST)** but this variant includes
 special additional metadata dedicated to this component. 
+
 
 ### SheetJs Library
 
