@@ -124,7 +124,7 @@ required to deploy and use it.
 
 The **sfpegTestObject__c** custom object is provided only for test purposes and is used in the 
 Apex test classes. The same object is included in various **PEG** repositories
-(e.g. **[PEG_LIST](https://github.com/pegros/PEG_LIST)** but this variant includes
+(e.g. **[PEG_LIST](https://github.com/pegros/PEG_LIST)**) but this variant includes
 special additional metadata dedicated to this component. 
 
 
