@@ -141,7 +141,7 @@
 
                 <!-- Step #3 - Synthesis of the operation -->
                 <template if:true={isStep3}>
-                    <div if:true={importStatus} class="slds-m-top_small slds-region_narrow ">
+                    <div if:true={importStatus} class="slds-m-top_small slds-region_narrow slds-p-horizontal_small">
                         <dl class="slds-dl_horizontal">
                             <template if:true={importStatus.failures}>
                                 <dt class="slds-text-title_bold slds-dl_horizontal__label slds-truncate"><span class="slds-text-color_error ">{importStatus.failures.length}</span> {failuresLabel}</dt>

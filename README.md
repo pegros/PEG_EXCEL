@@ -21,7 +21,7 @@ These components were built as contributions/examples for former & ongoing Advis
 ### **[sfpegExcelLoaderCmp](/help/sfpegExcelLoaderCmp.md)** Data Importer
 
 This component enables to easily:
-* select, upload and parse an Excel spreadsheet
+* select, upload and parse an Excel spreadsheet (_.xlsx_ extensions)
 * select one of its tab and trigger the import of the contained rows
 
 ![sfpegExcelLoaderCmp](/media/sfpegExcelLoader.png) 
@@ -43,7 +43,10 @@ Multiple options and controls are available for administrators:
 
 ## Technical Details
 
-Each component is provided in a dedicated folder containing all the dependencies
-required to deploy and use it.
+Each component is available for deployment in a dedicated folder containing all the dependencies
+(Apex classes, custom labels, static resource, permission sets...) required to deploy and use it.
 
-🚧 _Work in Progress_ 🚧 
+The actual **[SheetJs](https://sheetjs.com/)** Javascript library version used is the 
+community **mini** version addressing only _.xlsx_ files. You may see which version number
+is used by activating the debug checkbox on the component and change the version by modifying
+the content of **sfpegSheetJs** static resource content used by the components.
