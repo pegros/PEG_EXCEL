@@ -118,7 +118,7 @@ Salesforce setup.
 ## Technical Details
 ### Component Packaging
 
-The component is available for deployment in the **forece-app/main/sfpegExcelLoader** folder
+The component is available for deployment in the **force-app/main/sfpegExcelLoader** folder
 containing all the dependencies (Apex classes, custom labels, static resource, permission sets...)
 required to deploy and use it.
 

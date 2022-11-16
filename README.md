@@ -43,8 +43,8 @@ Multiple options and controls are available for administrators:
 
 ## Technical Details
 
-Each component is available for deployment in a dedicated folder containing all the dependencies
-(Apex classes, custom labels, static resource, permission sets...) required to deploy and use it.
+Each component is available for deployment in a dedicated folder (within **force-app/main**) containing
+all the dependencies (Apex classes, custom labels, static resource, permission sets...) required to deploy and use it.
 
 The actual **[SheetJs](https://sheetjs.com/)** Javascript library version used is the 
 community **mini** version addressing only _.xlsx_ files. You may see which version number
