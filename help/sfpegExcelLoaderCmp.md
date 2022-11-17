@@ -82,13 +82,13 @@ All of the configuration is done in the App Builder via a set of simple properti
 The following properties are available:
 * `Card Title`, `Card Icon` and `Card CSS Class` to customise the global container
 card of the component (all optional)
-* `Imported Object` to define the Object API Name of the records to be imported
-* `Lookup Field` to define the lookup Field API Name to be initialised with the current page
+* `Imported Object` to define the Object API name of the records to be imported
+* `Lookup Field` to define the lookup Field API name to be initialised with the current page
 record ID (if any) upon import
 * `Import Mode` to define the way records are imported (i.e. _insert_ or _upsert_ mode)
 * `Max. #Rows`to limit the number of rows loaded at once (e.g. to cope with DML limits or mitigate
 data corruption risks), 0 or empty meaning no limit
-* `Allowed Fields` to limit the actual field API nNames to be imported (e.g. to mitigate data corruption
+* `Allowed Fields` to limit the actual field API names to be imported (e.g. to mitigate data corruption
 risks), set as a stringified JSON list
 * `All or None?` to toggle between atomic (true) and best effort (false) error handling upon import.
     * In best effort mode all possible records are imported
