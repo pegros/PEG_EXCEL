@@ -65,6 +65,7 @@ import BACK_BUTTON_TITLE    from '@salesforce/label/c.sfpegExcelLoaderBackTitle'
 import INFO_BUTTON_TITLE    from '@salesforce/label/c.sfpegExcelLoaderInfoTitle';
 import UPLOAD_BUTTON_LABEL  from '@salesforce/label/c.sfpegExcelLoaderUploadLabel';
 import SELECT_BUTTON_LABEL  from '@salesforce/label/c.sfpegExcelLoaderSelectLabel';
+import DOWNLOAD_BUTTON_TITLE  from '@salesforce/label/c.sfpegExcelLoaderDownloadTitle';
 import NO_DATA_MESSAGE      from '@salesforce/label/c.sfpegExcelLoaderNoDataMessage';
 import FAILURES_LABEL       from '@salesforce/label/c.sfpegExcelLoaderFailuresLabel';
 import CREATIONS_LABEL      from '@salesforce/label/c.sfpegExcelLoaderCreationsLabel';
@@ -89,6 +90,13 @@ import UPLOAD_INFO_MSG      from '@salesforce/label/c.sfpegExcelLoaderUploadMess
 import IMPORT_FAILURE_MSG   from '@salesforce/label/c.sfpegExcelLoaderImportFailure';
 import IMPORT_PARTIAL_FAILURE_MSG   from '@salesforce/label/c.sfpegExcelLoaderImportPartialFailure';
 import IMPORT_SUCCESS_MSG   from '@salesforce/label/c.sfpegExcelLoaderImportSuccess';
+
+// for CSV result exports
+const SFPEG_EXCEL_LOADER = {
+    fieldDelimiter : ",",
+    valueDelimiter : "\"",
+    lineDelimiter  : "\r\n"
+};
 
 export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElement) {
 
@@ -128,15 +136,18 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
     messageDetails;                 // Message additional information displayed in standard / small
 
     // Uploaded file properties
-    fileInfo;                       // Flag controlling the displayed icon and its color
-    fileData;                       // Flag controlling the displayed icon and its color
-    sheetDataJson;                  // Flag controlling the displayed icon and its color
-    sheetData;                      // Flag controlling the displayed icon and its color
+    fileInfo;                       // Details about the last imported file
+    fileData;                       // Raw data read from the file
+    sheetDataJson;                  // Data extracted as JSON from the file (via XLSX utility)
+    sheetData;                      // Data per sheet reworked for display in the component
 
     // Import properties
     allowedFieldList;   // JSON parsing of allowedFields string variable
+    selectedData;       // Data selected upon last import
     importStatus;       // Result data of last import
 
+    //Data table Rendering optimisation (Summer22)
+    renderConfig = {bufferSize: 10};
 
     //----------------------------------------------------------------
     // Custom Labels
@@ -145,6 +156,7 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
     importButtonTitle = IMPORT_BUTTON_TITLE;
     backButtonTitle = BACK_BUTTON_TITLE;
     infoButtonTitle = INFO_BUTTON_TITLE;
+    downloadButtonTitle = DOWNLOAD_BUTTON_TITLE;
     uploadButtonLabel = UPLOAD_BUTTON_LABEL;
     selectButtonLabel = SELECT_BUTTON_LABEL;
     noDataMessage = NO_DATA_MESSAGE;
@@ -255,8 +267,7 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
     //----------------------------------------------------------------
     // Event Handlers
     //----------------------------------------------------------------
-
-    
+ 
     toggleHelp(event){
         if (this.isDebug) console.log('handleChange: START with showHelp ',this.showHelp);
         this.showHelp = !this.showHelp;
@@ -270,12 +281,17 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
         if (this.isDebug) console.log('handleChange: files ', JSON.stringify(event.files));
         if (this.isDebug) console.log('handleChange: value ', JSON.stringify(event.value));
 
+        let spinner = this.template.querySelector('lightning-spinner');
+        if (this.isDebug) console.log('handleChange: spinner fetched ', spinner);
+        spinner.classList.remove('slds-hide');
+
+
         this.isError = false;
         this.messageTitle = null;
         this.messageDetails = null;
 
         let fileInput = this.template.querySelector('lightning-input[data-name="fileInput"]');
-        if (this.isDebug) console.log('handleChange: fileInput ', fileInput);
+        if (this.isDebug) console.log('handleChange: fileInput fetched ', fileInput);
         if (this.isDebug) console.log('handleChange: fileInput value ', fileInput.value);
         if (this.isDebug) console.log('handleChange: fileInput files ', fileInput.files);
 
@@ -296,7 +312,6 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
             this.sheetData  = [];
             this.sheetDataJson.SheetNames.forEach(iter => {
                 if (this.isDebug) console.log('handleChange: processing sheet ', iter);
-
                 let iterDesc = this.extractSheet(iter);
                 this.sheetData.push(iterDesc);
                 if (this.isDebug) console.log('handleChange: iterDesc registered ', iterDesc);
@@ -307,6 +322,8 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
             this.messageTitle = UPLOAD_SUCCESS_MSG.replace('{0}', file.name);
             this.messageDetails = UPLOAD_INFO_MSG;
             this.processStep = 2;
+            spinner.classList.add('slds-hide');
+            if (this.isDebug) console.log('handleChange: END');
         };
         if (this.isDebug) console.log('handleChange: triggering readAsDataURL ', reader);
         try {
@@ -317,9 +334,9 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
             this.isError = true;
             this.messageTitle = INIT_FAILURE_MSG;
             this.messageDetails = this.formatError(error);
+            spinner.classList.add('slds-hide');
+            console.error('handleChange: END KO / file read error ', JSON.stringify(error));
         }
-
-        if (this.isDebug) console.log('handleChange: END');
     }
 
     handleTabActive(event) {
@@ -355,6 +372,7 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
         if (this.isDebug) console.log('handleImport: selectedSheet determined ',selectedSheet);
 
         let selectedData = this.sheetData.find(item => item.name === selectedSheet);
+        this.selectedData = selectedData;
         if (this.isDebug) console.log('handleImport: selectedData found ',selectedData);
 
         if (selectedData.hasMultiExtId) {
@@ -374,7 +392,7 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
             let newItem = {sobjectType: this.objectName};
 
             if (selectedData.hasRtLookup) {
-                let rtName = item['RecordType.DeveloperName']
+                let rtName = item['RecordType.DeveloperName'];
                 if (this.isDebug) console.log('handleImport: Looking for RecordType Developer Name ', rtName);
                 newItem.RecordTypeId = this.rtMap[rtName];
                 if (this.isDebug) console.log('handleImport: recordTypeId set ',item.RecordTypeId);
@@ -409,13 +427,14 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
             importedValues.push(newItem);
             if (this.isDebug) console.log('handleImport: newItem registered ', newItem);
         });
-        if (this.isDebug) console.log('handleImport: importedValues init ', importedValues);
+        if (this.isDebug) console.log('handleImport: importedValues init ', importedValues.length);
 
         let importRequest = {records: importedValues, allOrNone: this.isAllOrNone, keyField : selectedData.key};
         if ((selectedData.extIdField) && (this.importMode === 'upsert')) {
             importRequest.externalIdfield = selectedData.extIdField;
         }
         if (this.isDebug) console.log('handleImport: importRequest ready ', importRequest);
+
 
         importRecords(importRequest)
         .then( (results) => {
@@ -465,6 +484,49 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
         if (this.isDebug) console.log('handleNavigate: END / navigation triggered');
     }
 
+    handleDownload(event){
+        if (this.isDebug) console.log('handleDownload: START with file name ', this.fileInfo?.name);
+        if (this.isDebug) console.log('handleDownload: importStatus to export ', this.importStatus);
+
+        if ((!this.fileInfo?.name) || (!this.importStatus)) {
+            console.warn('handleDownload: END KO / invalid context');
+            return;
+        }
+
+        let workbook = XLSX.utils.book_new();
+        if (this.isDebug) console.log('handleDownload: selectedData to export ', JSON.stringify(this.selectedData));
+        if (this.selectedData.values) {
+            let selectedValues = (this.maxRows ? (this.selectedData.values).slice(0, this.maxRows) : this.selectedData.values);
+            if (this.isDebug) console.log('handleDownload: adding selection tab ', JSON.stringify(selectedValues));
+            let worksheet = XLSX.utils.json_to_sheet(selectedValues);
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Selection");
+        }
+        if (this.importStatus.creations) {
+            if (this.isDebug) console.log('handleDownload: adding creation tab ', JSON.stringify(this.importStatus.creations));
+            let worksheet = XLSX.utils.json_to_sheet(this.importStatus.creations);
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Creations");
+        }
+        if (this.importStatus.updates) {
+            if (this.isDebug) console.log('handleDownload: adding updates tab ', JSON.stringify(this.importStatus.updates));
+            let worksheet = XLSX.utils.json_to_sheet(this.importStatus.updates);
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Updates");
+        }
+        if (this.importStatus.failures) {
+            if (this.isDebug) console.log('handleDownload: adding creation tab ', JSON.stringify(this.importStatus.failures));
+            let worksheet = XLSX.utils.json_to_sheet(this.importStatus.failures);
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Failures");
+        }
+        /*let worksheet = XLSX.utils.json_to_sheet(outputData);
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Results");*/
+        if (this.isDebug) console.log('handleDownload: workbook ready ', workbook);
+
+
+        let outputFile = (this.fileInfo.name).replace(/\.[^/.]+$/, "") + '-status.xlsx';
+        if (this.isDebug) console.log('handleDownload: outputFile name init ', outputFile);
+
+        XLSX.writeFile(workbook, outputFile, { compression: true });
+        if (this.isDebug) console.log('handleDownload: END / workbook exported');
+    }
 
     //----------------------------------------------------------------
     // Utilities
@@ -646,5 +708,4 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
         if (this.isDebug) console.log('formatError: END returning ', errorMsg);
         return errorMsg;
     }
-
 }

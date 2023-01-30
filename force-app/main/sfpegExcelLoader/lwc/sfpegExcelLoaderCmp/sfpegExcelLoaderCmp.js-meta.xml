@@ -47,6 +47,11 @@
                         datasource="insert,upsert"
                         default="upsert"
                         description="Upsert vs Insert only import operation"/>
+            <property   name="isAllOrNone"
+                        label="All or None?"
+                        type="Boolean"
+                        description="Flag to control error handling upon import (false means importing all OK records)."/>
+
             <property   name="maxRows"
                         label="Max. #Rows"
                         type="Integer"
@@ -55,11 +60,7 @@
                         label="Allowed Fields"
                         type="String"
                         description="JSON list of field API Names allowed to be imported"/>
-            <property   name="isAllOrNone"
-                        label="All or None?"
-                        type="Boolean"
-                        description="Flag to control error handling upon import (false means importing all OK records)."/>
-
+            
             <property   name="isDebug"
                         label="Show Debug?"
                         type="Boolean"

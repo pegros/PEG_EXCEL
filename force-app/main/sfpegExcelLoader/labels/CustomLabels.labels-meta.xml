@@ -25,6 +25,14 @@
         <value>Go back to file upload</value>
     </labels>
     <labels>
+        <fullName>sfpegExcelLoaderDownloadTitle</fullName>
+        <categories>PEG Component LWC Action Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderDownloadTitle</shortDescription>
+        <value>Download operation results</value>
+    </labels>
+    <labels>
         <fullName>sfpegExcelLoaderInfoTitle</fullName>
         <categories>PEG Component LWC Action Title</categories>
         <language>en_US</language>

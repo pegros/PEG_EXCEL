@@ -35,7 +35,9 @@ The component basically provides a 3-step process to import data from an Excel s
 3. import result **summary**
 ![sfpegExcelLoaderCmp Step #3](/media/sfpegExcelLoaderStep3.png) 
 
+
 A few additional buttons are available in the card header
+* `download` (in step #3) to download import summary information in Excel format.
 * `back` icon enables to return to the initial **file selection** step
 * `information`icon enables to display a small popup with contextual information 
 about the import conditions

@@ -7,12 +7,21 @@
                 <lightning-button   if:true={isStep2}
                                     label={importButtonLabel}
                                     icon-name="utility:upload"
+                                    data-my-id="upload"
                                     variant="brand"
                                     title={importButtonTitle}
                                     onclick={handleImport} >
                 </lightning-button>
+                <lightning-button-icon  if:true={isStep3}
+                                        icon-name="utility:download"
+                                        data-my-id="download"
+                                        title={downloadButtonTitle}
+                                        alternative-text={downloadButtonTitle}
+                                        onclick={handleDownload} >
+                </lightning-button-icon>
                 <lightning-button-icon  if:true={isStep2or3}
                                         icon-name="utility:undo"
+                                        title={backButtonTitle}
                                         alternative-text={backButtonTitle}
                                         onclick={handleBack} >
                 </lightning-button-icon>
@@ -25,6 +34,10 @@
 
             <!-- Content Display -->
             <div class="slds-var-p-horizontal_medium">
+
+                <!-- Spinner Display -->
+                <lightning-spinner alternative-text="Loading" size="medium" class="slds-hide">
+                </lightning-spinner>
 
                 <!-- Message Display -->
                 <div if:true={messageTitle} >
@@ -59,7 +72,7 @@
                     </lightning-input>
                 </div>
 
-                <!-- Step #2 - Data Display and upsert trigger -->
+                <!-- Step #2 - Data Display and import trigger -->
                 <template if:true={isStep2}>
                     <div class="slds-m-top_x-small">
                         <lightning-tabset if:true={sheetData} class="slds-m-top_small">
@@ -94,7 +107,8 @@
                                             <lightning-datatable    hide-checkbox-column="true"
                                                                     key-field={iter.key}
                                                                     data={iter.values}
-                                                                    columns={iter.columns}>
+                                                                    columns={iter.columns}
+                                                                    render-config={renderConfig}>
                                             </lightning-datatable>
                                         </div>
                                         <div if:true={iter.hasWarnings} class="slds-m-top_small">
