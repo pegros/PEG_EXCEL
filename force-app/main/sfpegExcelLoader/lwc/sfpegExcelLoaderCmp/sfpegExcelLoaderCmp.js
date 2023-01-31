@@ -147,7 +147,8 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
     importStatus;       // Result data of last import
 
     //Data table Rendering optimisation (Summer22)
-    renderConfig = {bufferSize: 10};
+    //renderConfig = {bufferSize: 10};
+    renderConfig = {virtualize: 'vertical'};
 
     //----------------------------------------------------------------
     // Custom Labels
@@ -360,6 +361,10 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
     handleImport(event) {
         if (this.isDebug) console.log('handleImport: START with ',event);
 
+        let spinner = this.template.querySelector('lightning-spinner');
+        if (this.isDebug) console.log('handleChange: spinner fetched ', spinner);
+        spinner.classList.remove('slds-hide');
+
         this.isError = false;
         this.messageTitle = null;
         this.messageDetails = null;
@@ -453,6 +458,7 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
             }
 
             this.processStep = 3;
+            spinner.classList.add('slds-hide');
             if (this.isDebug) console.log('handleImport: END OK');
         })
         .catch( error => {
@@ -460,6 +466,7 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
             this.messageDetails = this.formatError(error);
             this.isError = true;
             this.processStep = 3;
+            spinner.classList.add('slds-hide');
             console.warn('handleImport: END KO ',error);
         });
 
@@ -501,18 +508,28 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
             let worksheet = XLSX.utils.json_to_sheet(selectedValues);
             XLSX.utils.book_append_sheet(workbook, worksheet, "Selection");
         }
+        let results = []
         if (this.importStatus.creations) {
             if (this.isDebug) console.log('handleDownload: adding creation tab ', JSON.stringify(this.importStatus.creations));
+            this.importStatus.creations.forEach(item => {
+                if (this.isDebug) console.log('handleDownload: processing item ', JSON.stringify(item));
+            });
             let worksheet = XLSX.utils.json_to_sheet(this.importStatus.creations);
             XLSX.utils.book_append_sheet(workbook, worksheet, "Creations");
         }
         if (this.importStatus.updates) {
             if (this.isDebug) console.log('handleDownload: adding updates tab ', JSON.stringify(this.importStatus.updates));
+            this.importStatus.updates.forEach(item => {
+                if (this.isDebug) console.log('handleDownload: processing item ', JSON.stringify(item));
+            });
             let worksheet = XLSX.utils.json_to_sheet(this.importStatus.updates);
             XLSX.utils.book_append_sheet(workbook, worksheet, "Updates");
         }
         if (this.importStatus.failures) {
-            if (this.isDebug) console.log('handleDownload: adding creation tab ', JSON.stringify(this.importStatus.failures));
+            if (this.isDebug) console.log('handleDownload: adding failure tab ', JSON.stringify(this.importStatus.failures));
+            this.importStatus.failures.forEach(item => {
+                if (this.isDebug) console.log('handleDownload: processing item ', JSON.stringify(item));
+            });
             let worksheet = XLSX.utils.json_to_sheet(this.importStatus.failures);
             XLSX.utils.book_append_sheet(workbook, worksheet, "Failures");
         }

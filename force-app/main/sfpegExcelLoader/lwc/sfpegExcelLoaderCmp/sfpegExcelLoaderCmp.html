@@ -107,8 +107,11 @@
                                             <lightning-datatable    hide-checkbox-column="true"
                                                                     key-field={iter.key}
                                                                     data={iter.values}
-                                                                    columns={iter.columns}
+                                                                    columns={iter.columns}>
+                                                                    <!--
+                                                                    render-mode="role-based"
                                                                     render-config={renderConfig}>
+                                                                    -->
                                             </lightning-datatable>
                                         </div>
                                         <div if:true={iter.hasWarnings} class="slds-m-top_small">
