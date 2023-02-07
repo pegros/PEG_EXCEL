@@ -77,7 +77,7 @@ explicitly select the applicable external ID field if multiple ones are availabl
 ## Component Configuration
 ### App Builder Configuration
 
-All of the configuration is done in the App Builder via a set of simple properties.
+All of the configuration is done in the App (or Flow) Builder via a set of simple properties.
 
 ![sfpegExcelLoaderCmp Configuration](/media/sfpegExcelLoaderConfig.png) 
 
@@ -86,7 +86,7 @@ The following properties are available:
 card of the component (all optional)
 * `Imported Object` to define the Object API name of the records to be imported
 * `Lookup Field` to define the lookup Field API name to be initialised with the current page
-record ID (if any) upon import
+record ID (if any) upon import (when in App Builder mode)
 * `Import Mode` to define the way records are imported (i.e. _insert_ or _upsert_ mode)
 * `Max. #Rows`to limit the number of rows loaded at once (e.g. to cope with DML limits or mitigate
 data corruption risks), 0 or empty meaning no limit
@@ -97,6 +97,8 @@ risks), set as a stringified JSON list
     * In atomic mode all records are rejected if one gets an error. 
 * `Show Debug?`to activate debug information (footer display and console logs)
 
+_Note_: when in Flow builder, an additional `Parent Record ID` property is available to
+explicitly define the value to be used to set the configured `Lookup Field`.
 
 ### User Permissions Assigment
 
