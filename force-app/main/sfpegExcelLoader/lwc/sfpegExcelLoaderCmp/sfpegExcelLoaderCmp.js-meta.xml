@@ -8,6 +8,7 @@
         <target>lightning__AppPage</target>
         <target>lightning__HomePage</target>
         <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
     </targets>
 
     <targetConfigs>
@@ -66,6 +67,71 @@
                         type="Boolean"
                         description="Flag to activate debug information."/>
             
+        </targetConfig>
+        <targetConfig targets="lightning__FlowScreen">
+            <property   name="cardTitle"
+                        label="Card Title"
+                        type="String"
+                        role="inputOnly"
+                        default="Records Upload"/>
+            <property   name="cardIcon"
+                        label="Card Icon"
+                        type="String"
+                        role="inputOnly"
+                        default="standard:logging"/>
+            <property   name="cardClass"
+                        label="Card CSS Class"
+                        type="String"
+                        role="inputOnly"
+                        default="slds-card slds-card_boundary"
+                        description="CSS Classes for the wrapping card div"/>
+
+            <property   name="objectName"
+                        label="Imported Object"
+                        type="String"
+                        default="Account"
+                        role="inputOnly"
+                        description="Object API Name of the records to be imported"/>
+            <property   name="lookupField"
+                        label="Lookup Field"
+                        type="String"
+                        role="inputOnly"
+                        description="Field API Name to be initialised with the parent record ID (if any) upon import"/>
+            <property   name="recordId"
+                        label="Parent Record ID"
+                        type="String"
+                        role="inputOnly"
+                        description="ID of the parent Record to be referenced"/>
+
+            <property   name="importMode"
+                        label="Import Mode"
+                        type="String"
+                        role="inputOnly"
+                        datasource="insert,upsert"
+                        default="upsert"
+                        description="Upsert vs Insert only import operation"/>
+            <property   name="isAllOrNone"
+                        label="All or None?"
+                        type="Boolean"
+                        role="inputOnly"
+                        description="Flag to control error handling upon import (false means importing all OK records)."/>
+
+            <property   name="maxRows"
+                        label="Max. #Rows"
+                        type="Integer"
+                        role="inputOnly"
+                        description="Max number of rows allowed per import (0 or empty meaning no limit)"/>
+            <property   name="allowedFields"
+                        label="Allowed Fields"
+                        type="String"
+                        role="inputOnly"
+                        description="JSON list of field API Names allowed to be imported"/>
+
+            <property   name="isDebug"
+                        label="Show Debug?"
+                        type="Boolean"
+                        role="inputOnly"
+                        description="Flag to activate debug information."/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
