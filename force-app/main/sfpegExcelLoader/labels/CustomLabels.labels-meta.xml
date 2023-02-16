@@ -244,4 +244,29 @@
         <shortDescription>sfpegExcelLoaderImportSuccess</shortDescription>
         <value>Import Success</value>
     </labels>
+
+    <labels>
+        <fullName>sfpegExcelLoaderSummaryStatus</fullName>
+        <categories>PEG Component LWC Field Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderSummaryStatus</shortDescription>
+        <value>IMPORT_STATUS</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderSummaryDetails</fullName>
+        <categories>PEG Component LWC Field Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderSummaryDetails</shortDescription>
+        <value>IMPORT_DETAILS</value>
+    </labels>
+    <labels>
+        <fullName>sfpegExcelLoaderSummaryTab</fullName>
+        <categories>PEG Component LWC Tab Label</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sfpegExcelLoaderSummaryTab</shortDescription>
+        <value>Import Summary</value>
+    </labels>
 </CustomLabels>

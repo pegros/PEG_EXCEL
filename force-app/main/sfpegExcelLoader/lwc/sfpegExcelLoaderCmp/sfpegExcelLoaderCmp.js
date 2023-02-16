@@ -91,6 +91,10 @@ import IMPORT_FAILURE_MSG   from '@salesforce/label/c.sfpegExcelLoaderImportFail
 import IMPORT_PARTIAL_FAILURE_MSG   from '@salesforce/label/c.sfpegExcelLoaderImportPartialFailure';
 import IMPORT_SUCCESS_MSG   from '@salesforce/label/c.sfpegExcelLoaderImportSuccess';
 
+import SUMMARY_STATUS       from '@salesforce/label/c.sfpegExcelLoaderSummaryStatus';
+import SUMMARY_DETAILS      from '@salesforce/label/c.sfpegExcelLoaderSummaryDetails';
+import SUMMARY_TAB          from '@salesforce/label/c.sfpegExcelLoaderSummaryTab';
+
 // for CSV result exports
 const SFPEG_EXCEL_LOADER = {
     fieldDelimiter : ",",
@@ -145,6 +149,7 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
     allowedFieldList;   // JSON parsing of allowedFields string variable
     selectedData;       // Data selected upon last import
     importStatus;       // Result data of last import
+    importKey;          // Key field used at last import
 
     //Data table Rendering optimisation (Summer22)
     //renderConfig = {bufferSize: 10};
@@ -439,7 +444,7 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
             importRequest.externalIdfield = selectedData.extIdField;
         }
         if (this.isDebug) console.log('handleImport: importRequest ready ', importRequest);
-
+        this.importKey = selectedData.key;
 
         importRecords(importRequest)
         .then( (results) => {
@@ -493,7 +498,8 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
 
     handleDownload(event){
         if (this.isDebug) console.log('handleDownload: START with file name ', this.fileInfo?.name);
-        if (this.isDebug) console.log('handleDownload: importStatus to export ', this.importStatus);
+        if (this.isDebug) console.log('handleDownload: last importStatus ', this.importStatus);
+        if (this.isDebug) console.log('handleDownload: last importKey ', this.importKey);
 
         if ((!this.fileInfo?.name) || (!this.importStatus)) {
             console.warn('handleDownload: END KO / invalid context');
@@ -502,40 +508,57 @@ export default class SfpegExcelLoaderCmp extends NavigationMixin(LightningElemen
 
         let workbook = XLSX.utils.book_new();
         if (this.isDebug) console.log('handleDownload: selectedData to export ', JSON.stringify(this.selectedData));
-        if (this.selectedData.values) {
+
+        /*if (this.selectedData.values) {
             let selectedValues = (this.maxRows ? (this.selectedData.values).slice(0, this.maxRows) : this.selectedData.values);
             if (this.isDebug) console.log('handleDownload: adding selection tab ', JSON.stringify(selectedValues));
-            let worksheet = XLSX.utils.json_to_sheet(selectedValues);
-            XLSX.utils.book_append_sheet(workbook, worksheet, "Selection");
-        }
-        let results = []
+            let worksheet2 = XLSX.utils.json_to_sheet(selectedValues);
+            XLSX.utils.book_append_sheet(workbook, worksheet2, "Source");
+        }*/
+        let results = [...this.selectedData.values];
         if (this.importStatus.creations) {
             if (this.isDebug) console.log('handleDownload: adding creation tab ', JSON.stringify(this.importStatus.creations));
             this.importStatus.creations.forEach(item => {
                 if (this.isDebug) console.log('handleDownload: processing item ', JSON.stringify(item));
+                let itemResult = results.find(itemR => itemR[this.importKey] === item.name);
+                if (this.isDebug) console.log('handleDownload: itemResult found ', JSON.stringify(itemResult));
+                itemResult[SUMMARY_STATUS] = 'inserted';
+                itemResult[SUMMARY_DETAILS] = itemResult.id;
+                if (this.isDebug) console.log('handleDownload: itemResult updated ', JSON.stringify(itemResult));
             });
-            let worksheet = XLSX.utils.json_to_sheet(this.importStatus.creations);
-            XLSX.utils.book_append_sheet(workbook, worksheet, "Creations");
+            //let worksheet2 = XLSX.utils.json_to_sheet(this.importStatus.creations);
+            //XLSX.utils.book_append_sheet(workbook, worksheet2, "Creations");
         }
         if (this.importStatus.updates) {
             if (this.isDebug) console.log('handleDownload: adding updates tab ', JSON.stringify(this.importStatus.updates));
             this.importStatus.updates.forEach(item => {
                 if (this.isDebug) console.log('handleDownload: processing item ', JSON.stringify(item));
+                let itemResult = results.find(itemR => itemR[this.importKey] === item.name);
+                if (this.isDebug) console.log('handleDownload: itemResult found ', JSON.stringify(itemResult));
+                itemResult[SUMMARY_STATUS] = 'updated';
+                itemResult[SUMMARY_DETAILS] = item.id;
+                if (this.isDebug) console.log('handleDownload: itemResult updated ', JSON.stringify(itemResult));
             });
-            let worksheet = XLSX.utils.json_to_sheet(this.importStatus.updates);
-            XLSX.utils.book_append_sheet(workbook, worksheet, "Updates");
+            //let worksheet2 = XLSX.utils.json_to_sheet(this.importStatus.updates);
+            //XLSX.utils.book_append_sheet(workbook, worksheet2, "Updates");
         }
         if (this.importStatus.failures) {
             if (this.isDebug) console.log('handleDownload: adding failure tab ', JSON.stringify(this.importStatus.failures));
             this.importStatus.failures.forEach(item => {
                 if (this.isDebug) console.log('handleDownload: processing item ', JSON.stringify(item));
+                let itemResult = results.find(itemR => itemR[this.importKey] === item.name);
+                if (this.isDebug) console.log('handleDownload: itemResult found ', JSON.stringify(itemResult));
+                itemResult[SUMMARY_STATUS] = 'failed';
+                itemResult[SUMMARY_DETAILS] = item.error;
+                if (this.isDebug) console.log('handleDownload: itemResult updated ', JSON.stringify(itemResult));
             });
-            let worksheet = XLSX.utils.json_to_sheet(this.importStatus.failures);
-            XLSX.utils.book_append_sheet(workbook, worksheet, "Failures");
+            //let worksheet2 = XLSX.utils.json_to_sheet(this.importStatus.failures);
+            //XLSX.utils.book_append_sheet(workbook, worksheet2, "Failures");
         }
-        /*let worksheet = XLSX.utils.json_to_sheet(outputData);
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Results");*/
+        let worksheet = XLSX.utils.json_to_sheet(results);
+        XLSX.utils.book_append_sheet(workbook, worksheet, SUMMARY_TAB);
         if (this.isDebug) console.log('handleDownload: workbook ready ', workbook);
+
 
 
         let outputFile = (this.fileInfo.name).replace(/\.[^/.]+$/, "") + '-status.xlsx';
