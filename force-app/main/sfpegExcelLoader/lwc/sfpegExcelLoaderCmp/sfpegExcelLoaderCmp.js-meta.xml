@@ -107,9 +107,8 @@
                         label="Import Mode"
                         type="String"
                         role="inputOnly"
-                        datasource="insert,upsert"
                         default="upsert"
-                        description="Upsert vs Insert only import operation"/>
+                        description="upsert vs insert only import operation"/>
             <property   name="isAllOrNone"
                         label="All or None?"
                         type="Boolean"
