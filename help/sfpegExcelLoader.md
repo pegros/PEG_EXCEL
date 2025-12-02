@@ -1,7 +1,4 @@
----
-# sfpegExcelLoaderCmp Component
----
-
+# ![Logo](/media/Logo.png) &nbsp; **sfpegExcelLoader** Component
 
 ## Introduction
 
@@ -21,8 +18,23 @@ Multiple options and controls are available for administrators:
 * possible limitation of the max. number of rows and of the allowed fields
 * possible automatic valuation of a lookup field with the current page record ID
 
+ℹ️ This LWC component is available for standard Lightning UX as well as Screen Flows.
 
----
+⚠️ Experience Sites are not supported (yet).
+
+
+## Installation
+
+This component may be installed and upgraded as the `sfpegExcel-loader` unlocked package
+directly on your Org via the installation link provided in the [release notes](#release-notes).
+
+⚠️ It requires the **[sfpegList-core](https://github.com/pegros/PEG_LIST/blob/master/help/sfpegListPkgCore.md)** package to be already 
+deployed on the Org for the **sfpegTestObject** custom object used in Apex test classes.
+
+⚠️ After package installation, you need to grant your users access to the supporting Apex 
+classes via the `sfpegExcelLoaderUsage` permission set.
+
+
 ## Component Overview
 
 The component basically provides a 3-step process to import data from an Excel spreadsheet.
@@ -73,7 +85,6 @@ explicitly select the applicable external ID field if multiple ones are availabl
 ![sfpegExcelLoaderCmp External ID Selection](/media/sfpegExcelLoaderExtIdSelection.png) 
 
 
----
 ## Component Configuration
 ### App Builder Configuration
 
@@ -97,8 +108,9 @@ risks), set as a stringified JSON list
     * In atomic mode all records are rejected if one gets an error. 
 * `Show Debug?`to activate debug information (footer display and console logs)
 
-_Note_: when in Flow builder, an additional `Parent Record ID` property is available to
+ℹ️ When in Flow builder, an additional `Parent Record ID` property is available to
 explicitly define the value to be used to set the configured `Lookup Field`.
+
 
 ### User Permissions Assigment
 
@@ -114,22 +126,23 @@ The component relies on a set of custom labels for various labels, titles or err
 They are all prefixed as `sfpegExcelLoader...` and may easily be customised or translated via standard 
 Salesforce setup.
 
-**Beware** that some of them support token merging to inject data in the custom label content
+⚠️ **Beware** that some of them support token merging to inject data in the custom label content
 (usually via `{0}`token).
 
 
----
 ## Technical Details
+
 ### Component Packaging
 
-The component is available for deployment in the **force-app/main/sfpegExcelLoader** folder
-containing all the dependencies (Apex classes, custom labels, static resource, permission sets...)
-required to deploy and use it.
+The package is available for deployment in the **force-app/sfpegExcelLoader** folder
+containing the LWC component as well as all the dependencies (Apex classes, custom labels,
+static resource, permission sets...) required to deploy and use it.
 
-The **sfpegTestObject__c** custom object is provided only for test purposes and is used in the 
-Apex test classes. The same object is included in various **PEG** repositories
-(e.g. **[PEG_LIST](https://github.com/pegros/PEG_LIST)**) but this variant includes
-special additional metadata dedicated to this component. 
+
+### Test Object
+
+The package relies on the **sfpegTestObject__c** custom object for Apex class test purposes.
+This object is fetched from the **[sfpegList-core](https://github.com/pegros/PEG_LIST/blob/master/help/sfpegListPkgCore.md)** package.
 
 
 ### SheetJs Library
@@ -138,3 +151,19 @@ The actual **[SheetJs](https://sheetjs.com/)** Javascript library version used i
 community **mini** version addressing only _.xlsx_ files. You may see which version number
 is used by activating the debug checkbox on the component and change the version by modifying
 the content of **sfpegSheetJs** static resource content used by the component.
+
+
+## Release Notes
+
+### December 2025 - v1.1.0
+
+First version with the new unlocked package structure.
+Dependency introduced with the **[sfpegList-core]** unlocked package because of the **sfpegTestObject__c** object.
+
+Prerequisites are:
+* the `November 2025` version of the **[sfpegList-core](https://github.com/pegros/PEG_LIST/blob/master/help/sfpegListPkgCore.md#november-2025---v110)**
+
+Install it:
+* from [here ⬇️](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tJ7000000xIlpIAE) for production orgs,
+* from [here ⬇️](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tJ7000000xIlpIAE) for sandboxes,
+* or by adding the following relative URL to your Org domain: `/packaging/installPackage.apexp?p0=04tJ7000000xIlpIAE`

@@ -1,12 +1,69 @@
 {
   "packageDirectories": [
     {
-      "path": "force-app",
+      "path": "force-app/main",
       "default": true
+    },
+    {
+      "versionName": "Dec. 25",
+      "versionNumber": "1.1.0.NEXT",
+      "path": "./force-app/sfpegExcelLoader",
+      "default": false,
+      "package": "sfpegExcel-loader",
+      "versionDescription": "Data loader LWC component from Excel Spreadsheet",
+      "postInstallUrl": "https://github.com/pegros/PEG_LIST/blob/master/help/sfpegExcelLoader.md#installation",
+      "releaseNotesUrl": "https://github.com/pegros/PEG_LIST/blob/master/help/sfpegExcelLoader.md#december-2025---v100",
+      "dependencies": [
+        {
+          "package": "sfpegList-core",
+          "versionNumber": "1.1.0.LATEST"
+        }
+      ],
+      "apexTestAccess": {
+        "permissionSets": [
+          "sfpegListTest"
+        ],
+        "permissionSetLicenses": []
+      }
+    },
+    {
+      "versionName": "Dec. 25",
+      "versionNumber": "1.1.0.NEXT",
+      "path": "./force-app/sfpegExcelExporter",
+      "default": false,
+      "package": "sfpegExcel-exporter",
+      "versionDescription": "Data exporter LWC component to Excel Spreadsheet",
+      "postInstallUrl": "https://github.com/pegros/PEG_LIST/blob/master/help/sfpegExcelExporter.md#installation",
+      "releaseNotesUrl": "https://github.com/pegros/PEG_LIST/blob/master/help/sfpegExcelExporter.md#december-2025---v100",
+      "dependencies": [
+        {
+          "package": "sfpegList-core",
+          "versionNumber": "1.1.0.LATEST"
+        },
+        {
+          "package": "sfpegExcel-loader",
+          "versionNumber": "1.1.0.LATEST"
+        }
+      ],
+      "apexTestAccess": {
+        "permissionSets": [
+          "sfpegListTest"
+        ],
+        "permissionSetLicenses": []
+      }
     }
   ],
   "name": "PEG_EXCEL",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "55.0"
+  "sourceApiVersion": "55.0",
+  "packageAliases": {
+    "sfpegList-core": "0HoJ7000000XZBUKA4",
+    "sfpegList-core@1.1.0-2": "04tJ7000000xIh3IAE",
+    "sfpegExcel-loader": "0HoJ7000000XZDfKAO",
+    "sfpegExcel-exporter": "0HoJ7000000XZDkKAO",
+    "sfpegExcel-loader@1.0.0-1": "04tJ7000000xIlkIAE",
+    "sfpegExcel-loader@1.1.0-1": "04tJ7000000xIlpIAE",
+    "sfpegExcel-exporter@1.1.0-1": "04tJ7000000xIluIAE"
+  }
 }

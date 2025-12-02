@@ -5,7 +5,7 @@
         <categories>PEG Component LWC Button Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderImportLabel</shortDescription>
+        <shortDescription>Label for the Import button of the Excel Loader component</shortDescription>
         <value>Import</value>
     </labels>
     <labels>
@@ -13,7 +13,7 @@
         <categories>PEG Component LWC Action Title</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderImportTitle</shortDescription>
+        <shortDescription>Title for the Import button of the Excel Loader component</shortDescription>
         <value>Launch data import for displayed file tab</value>
     </labels>
     <labels>
@@ -21,7 +21,7 @@
         <categories>PEG Component LWC Action Title</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderBackTitle</shortDescription>
+        <shortDescription>Title for the Back button of the Excel Loader component</shortDescription>
         <value>Go back to file upload</value>
     </labels>
     <labels>
@@ -29,7 +29,7 @@
         <categories>PEG Component LWC Action Title</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderDownloadTitle</shortDescription>
+        <shortDescription>Title for the Download button of the Excel Loader component</shortDescription>
         <value>Download operation results</value>
     </labels>
     <labels>
@@ -37,7 +37,7 @@
         <categories>PEG Component LWC Action Title</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderInfoTitle</shortDescription>
+        <shortDescription>Title for the Information button of the Excel Loader component</shortDescription>
         <value>More information</value>
     </labels>
     <labels>
@@ -45,7 +45,7 @@
         <categories>PEG Component LWC Action Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderUploadLabel</shortDescription>
+        <shortDescription>Header of the Upload popup of the Excel Loader component</shortDescription>
         <value>Please upload your Excel spreadsheet</value>
     </labels>
     <labels>
@@ -53,7 +53,7 @@
         <categories>PEG Component LWC Action Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderSelectLabel</shortDescription>
+        <shortDescription>Label for the Unique ID selector of the Excel Loader component</shortDescription>
         <value>Please select Unique ID field to use</value>
     </labels>
     <labels>
@@ -61,7 +61,7 @@
         <categories>PEG Component LWC Message</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderNoDataMessage</shortDescription>
+        <shortDescription>Warning message of the Excel Loader component when no data</shortDescription>
         <value>No data available on this tab</value>
     </labels>
     <labels>
@@ -69,7 +69,7 @@
         <categories>PEG Component LWC Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderFailuresLabel</shortDescription>
+        <shortDescription>Error summary label of the of the Excel Loader component</shortDescription>
         <value>failures</value>
     </labels>
     <labels>
@@ -77,7 +77,7 @@
         <categories>PEG Component LWC Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderCreationsLabel</shortDescription>
+        <shortDescription>Creation summary label of the of the Excel Loader component</shortDescription>
         <value>creations</value>
     </labels>
     <labels>
@@ -85,7 +85,7 @@
         <categories>PEG Component LWC Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderUpdatesLabel</shortDescription>
+        <shortDescription>Updates summary label of the of the Excel Loader component</shortDescription>
         <value>updates</value>
     </labels>
 
@@ -94,7 +94,7 @@
         <categories>PEG Component LWC Information Message</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderRowCountMessage</shortDescription>
+        <shortDescription>Row count message of the Excel Loader component</shortDescription>
         <value>{0} records available in this tab.</value>
     </labels>
     <labels>
@@ -102,7 +102,7 @@
         <categories>PEG Component LWC Information Message</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderExternalIdMessage</shortDescription>
+        <shortDescription>Uniquer ID message of the Excel Loader component</shortDescription>
         <value>{0} field is used as unique identifier.</value>
     </labels>
     <labels>
@@ -110,7 +110,7 @@
         <categories>PEG Component LWC Warning Message</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderMaxRowWarning</shortDescription>
+        <shortDescription>Max rows message of the Excel Loader component</shortDescription>
         <value>Only the first {0} records will be imported!</value>
     </labels>
 
@@ -120,7 +120,7 @@
         <categories>PEG Component LWC Popup Title</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderHelpTitle</shortDescription>
+        <shortDescription>Header of the help popup of the Excel Loader component</shortDescription>
         <value>Import Context</value>
     </labels>
     <labels>
@@ -128,7 +128,7 @@
         <categories>PEG Component LWC Popup Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderHelpMode</shortDescription>
+        <shortDescription>Mode information label of the Excel Loader component</shortDescription>
         <value>Mode</value>
     </labels>
     <labels>
@@ -136,7 +136,7 @@
         <categories>PEG Component LWC Popup Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderHelpObject</shortDescription>
+        <shortDescription>Object information label of the Excel Loader component</shortDescription>
         <value>Object</value>
     </labels>
     <labels>
@@ -144,7 +144,7 @@
         <categories>PEG Component LWC Popup Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderHelpLookup</shortDescription>
+        <shortDescription>Lookup information label of the Excel Loader component</shortDescription>
         <value>Lookup</value>
     </labels>
     <labels>
@@ -152,7 +152,7 @@
         <categories>PEG Component LWC Popup Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderHelpFields</shortDescription>
+        <shortDescription>Fields information label of the Excel Loader component</shortDescription>
         <value>Fields</value>
     </labels>
     <labels>
@@ -160,7 +160,7 @@
         <categories>PEG Component LWC Popup Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderHelpMaxRows</shortDescription>
+        <shortDescription>Max rows information label of the Excel Loader component</shortDescription>
         <value>Max. #Rows</value>
     </labels>
     <labels>
@@ -168,7 +168,7 @@
         <categories>PEG Component LWC Popup Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderHelpExtensions</shortDescription>
+        <shortDescription>Extensions information label of the Excel Loader component</shortDescription>
         <value>Extensions</value>
     </labels>
     <labels>
@@ -176,7 +176,7 @@
         <categories>PEG Component LWC Popup Message</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderHelpAllFieldsMessage</shortDescription>
+        <shortDescription>All Fields message of the Excel Loader component</shortDescription>
         <value>Any allowed for the user</value>
     </labels>
     <labels>
@@ -184,7 +184,7 @@
         <categories>PEG Component LWC Popup Message</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderHelpExcelExtensionMessage</shortDescription>
+        <shortDescription>File Extensions message of the Excel Loader component</shortDescription>
         <value>.xlsx only</value>
     </labels>
     <labels>
@@ -192,7 +192,7 @@
         <categories>PEG Component LWC Popup Message</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderHelpNoLookupMessage</shortDescription>
+        <shortDescription>No lookup message of the Excel Loader component</shortDescription>
         <value>None</value>
     </labels>
 
@@ -201,7 +201,7 @@
         <categories>PEG Component LWC Warning Message</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderInitFailure</shortDescription>
+        <shortDescription>Init error message of the Excel Loader component</shortDescription>
         <value>Initialisation failure</value>
     </labels>
     <labels>
@@ -209,7 +209,7 @@
         <categories>PEG Component LWC Message</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderUploadSuccess</shortDescription>
+        <shortDescription>Upload OK message of the Excel Loader component</shortDescription>
         <value>File {0} successfully loaded</value>
     </labels>
     <labels>
@@ -217,7 +217,7 @@
         <categories>PEG Component LWC Message</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderUploadMessage</shortDescription>
+        <shortDescription>Upload continue message of the Excel Loader component</shortDescription>
         <value>Please select the tab containing the proper record data before launching the import.</value>
     </labels>
     <labels>
@@ -225,7 +225,7 @@
         <categories>PEG Component LWC Warning Message</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderImportFailure</shortDescription>
+        <shortDescription>Import error message of the Excel Loader component</shortDescription>
         <value>Import Failure</value>
     </labels>
     <labels>
@@ -233,7 +233,7 @@
         <categories>PEG Component LWC Warning Message</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderImportPartialFailure</shortDescription>
+        <shortDescription>Partial import error message of the Excel Loader component</shortDescription>
         <value>Import Partial Failure</value>
     </labels>
     <labels>
@@ -241,7 +241,7 @@
         <categories>PEG Component LWC Message</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderImportSuccess</shortDescription>
+        <shortDescription>Import OK message of the Excel Loader component</shortDescription>
         <value>Import Success</value>
     </labels>
 
@@ -250,7 +250,7 @@
         <categories>PEG Component LWC Field Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderSummaryStatus</shortDescription>
+        <shortDescription>Summary import status column name of the Excel Loader component</shortDescription>
         <value>IMPORT_STATUS</value>
     </labels>
     <labels>
@@ -258,7 +258,7 @@
         <categories>PEG Component LWC Field Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderSummaryDetails</shortDescription>
+        <shortDescription>Summary import details column name of the Excel Loader component</shortDescription>
         <value>IMPORT_DETAILS</value>
     </labels>
     <labels>
@@ -266,7 +266,7 @@
         <categories>PEG Component LWC Tab Label</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>sfpegExcelLoaderSummaryTab</shortDescription>
+        <shortDescription>Import status tab label of the Excel Loader component</shortDescription>
         <value>Import Summary</value>
     </labels>
 </CustomLabels>

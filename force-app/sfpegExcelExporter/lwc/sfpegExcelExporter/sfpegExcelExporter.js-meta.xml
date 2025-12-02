@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SF PEG Excel Exporter</masterLabel>
+    <description>This component enables to handle list Excel Export notifications.</description>
+
+    <targets>
+        <target>lightning__UtilityBar</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightning__UtilityBar,lightningCommunity__Default">
+            <property   name="notifChannel"
+                        label="Notification Channel"
+                        type="String"
+                        default="sfpegExcelExport"
+                        description="Name of the sfpegCustomAction notification channel to subscribe to (to activate component display)."/>
+
+            <property   name="isDebug"
+                        label="Debug?"
+                        type="Boolean"
+                        default="false"
+                        description="Flag to show debug information."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
