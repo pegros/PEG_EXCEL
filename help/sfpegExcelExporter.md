@@ -110,6 +110,6 @@ Prerequisites are:
 * the `December 2025` version of the **[sfpegExcel-loader](/help/sfpegExcelLoader.md#december-2025---v110)**
 
 Install it:
-* from [here ⬇️](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tJ7000000xIluIAE) for production orgs,
-* from [here ⬇️](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tJ7000000xIluIAE) for sandboxes,
-* or by adding the following relative URL to your Org domain: `/packaging/installPackage.apexp?p0=04tJ7000000xIluIAE`
+* from [here ⬇️](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tJ7000000xIlzIAE) for production orgs,
+* from [here ⬇️](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tJ7000000xIlzIAE) for sandboxes,
+* or by adding the following relative URL to your Org domain: `/packaging/installPackage.apexp?p0=04tJ7000000xIlzIAE`
